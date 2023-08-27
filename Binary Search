@@ -1,0 +1,76 @@
+//binary search
+#include <stdio.h>
+int binarySearch(int array[], int x, int low, int high)
+{
+ // Repeat until the pointers low and high meet each other
+ while (low <= high)
+ {
+ int mid = low + (high - low) / 2;
+ if (array[mid] == x)
+ return mid;
+ if (array[mid] < x)
+ low = mid + 1;
+ else
+ high = mid - 1;
+ }
+ return -1;
+}
+int main()
+{
+ int data[50], size, x;
+ // Input Array
+ printf("How many Elements do you have? \n");
+ scanf("%d", &size);
+ printf("NOTE: ENTER ELEMENTS IN SORTED ORDER\n");
+ for (int i = 0; i < size; i++)
+ {
+ printf("Enter Element %d: ", i);
+ scanf("%d", &data[i]);
+ }
+ printf("Enter Element to Search: ");
+ scanf("%d", &x);
+ int result = binarySearch(data, x, 0, size - 1);
+ if (result == -1)
+ printf("Not found");
+ else
+ printf("Element is found at index %d", result);
+ return 0;
+}
+//binar search by recursion
+#include <stdio.h>
+int binarySearch(int array[], int x, int low, int high)
+{
+ if (high >= low)
+ {
+ int mid = low + (high - low) / 2;
+ // If found at mid, then return it
+ if (array[mid] == x)
+ return mid;
+ // Search the left half
+ if (array[mid] > x)
+ return binarySearch(array, x, low, mid - 1);
+ // Search the right half
+ return binarySearch(array, x, mid + 1, high);
+ }
+ return -1;
+}
+int main()
+{
+ int data[50], size,x;
+ // Input Array
+ printf("How many Elements do you have? \n");
+ scanf("%d", &size);
+ printf("NOTE: ENTER ELEMENTS IN SORTED ORDER\n");
+ for (int i = 0; i < size; i++)
+ { 
+ printf("Enter Element %d: ", i);
+ scanf("%d", &data[i]);
+ }
+ printf("Enter Element to Search: ");
+ scanf("%d",&x);
+ int result = binarySearch(data, x, 0, size - 1);
+ if (result == -1)
+ printf("Not found");
+ else
+ printf("Element is found at index %d", result);
+}
