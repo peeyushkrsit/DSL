@@ -1,0 +1,86 @@
+//linear search
+#include <stdio.h>
+int search(int arr[], int N, int x)
+{
+int i;
+for (i = 0; i < N; i++){
+if (arr[i] == x){
+return i;
+}
+}
+return -1;
+}
+// Driver code
+int main()
+{
+int data[50], size, x;
+// Input Array
+printf("How many Elements do you have? \n");
+scanf("%d", &size);
+for (int i = 0; i < size; i++)
+{
+printf("Enter Element %d: ", i);
+scanf("%d", &data[i]);
+}
+printf("Enter Element to Search: ");
+scanf("%d", &x);
+int result = search(data, size, x);
+(result == -1)
+? printf("Element is not present in array")
+: printf("Element is present at index %d", result);
+return 0;
+}
+//linear search by recursion
+#include <stdio.h>
+int count=0;
+void output(int n, int marks[])
+{
+ for (int i = 0; i < n; i++)
+ {
+ printf("The value of element %d is %d\n", i, *(marks + i));
+ }
+ printf("\n");
+}
+int linearSearchrec(int n, int marks[], int a)
+{
+ if (n == 0)
+ {
+ return -1;
+ }
+ else
+ {
+ // Check if the element at the current index is equal to the 
+key
+ if (marks[n - 1] == a)
+ {
+ // If equal, print the index
+ printf("%d found at Index %d\n",a,n-1);
+ count++;
+ }
+ // If not equal, call the function again with the size reduced 
+by 1
+ return linearSearchrec(n - 1, marks, a);
+ }
+}
+int main()
+{
+ int marks[40];
+ int n, a, b;
+ printf("How many elements do you have? \n");
+ scanf("%d", &n);
+ for (int i = 0; i < n; i++)
+ {
+ printf("Enter %d element: ", i);
+ scanf("%d", &marks[i]);
+ }
+ output(n, marks);
+ printf("Enter Element to search: ");
+ scanf("%d", &a);
+ printf("\n");
+ b = linearSearchrec(n, marks, a);
+ if ((b == -1)&&(count==0))
+ {
+ printf("Not Found in Array!");
+ }
+ return 0;
+}
