@@ -1,0 +1,79 @@
+// Insertion sort in C
+#include <stdio.h>
+// Function to print an array
+void printArray(int array[], int size)
+{
+ for (int i = 0; i < size; i++)
+ {
+ printf("%d ", array[i]);
+ }
+ printf("\n");
+}
+void insertionSort(int array[], int size)
+{
+ for (int step = 1; step < size; step++)
+ {
+ int key = array[step];
+ int j = step - 1;
+ // Compare key with each element on the left of it until an 
+element smaller than
+ // it is found.
+ // For descending order, change key<array[j] to key>array[j].
+ while (key < array[j] && j >= 0)
+ {
+ array[j + 1] = array[j];
+ --j;
+ }
+ array[j + 1] = key;
+ // Printing Steps
+ printArray(array, size);
+ }
+}
+// Driver code
+int main()
+{
+ int data[50], size;
+ printf("How many Elements do you have? \n");
+ scanf("%d", &size);
+ // Input Array
+ for (int i = 0; i < size; i++)
+ {
+ printf("Enter Element %d: ", i);
+ scanf("%d", &data[i]);
+ }
+ printf("\nUnsorted Array: \n");
+ printArray(data, size);
+ printf("\nSteps: \n");
+ insertionSort(data, size);
+ printf("Sorted array in ascending order:\n");
+ printArray(data, size);
+}
+//insertion sort by recursion
+#include <stdio.h>
+void insertionSortRecursive(int arr[], int n) {
+ if (n <= 1)
+ return;
+ insertionSortRecursive(arr, n - 1);
+ int last = arr[n - 1];
+ int j = n - 2;
+ while (j >= 0 && arr[j] > last) {
+ arr[j + 1] = arr[j];
+ j--;
+ }
+ arr[j + 1] = last;
+}
+int main() {
+ int arr[] = {12, 11, 13, 5, 6};
+ int n = sizeof(arr) / sizeof(arr[0]);
+ printf("Original array: ");
+ for (int i = 0; i < n; i++) {
+ printf("%d ", arr[i]);
+ }
+ printf("\n");
+ insertionSortRecursive(arr, n);
+ printf("Sorted array: ");
+ for (int i = 0; i < n; i++) {
+ printf("%d ", arr[i]);
+ }
+ return 0;
+}
