@@ -1,0 +1,91 @@
+// Selection sort in C
+#include <stdio.h>
+//Function to swap the the position of two elements
+void swap(int *a, int *b)
+{
+ int temp = *a;
+ *a = *b;
+ *b = temp;
+}
+//Function to print an array
+void printArray(int array[], int size)
+{
+ for (int i = 0; i < size; ++i)
+ {
+ printf("%d ", array[i]);
+ }
+ printf("\n");
+}
+void selectionSort(int array[], int size)
+{
+ int step;
+ for (step = 0; step < size - 1; step++)
+ {
+ int min_idx = step;
+ for (int i = step + 1; i < size; i++)
+ {
+ // To sort in descending order, change > to < in this line.
+ // Select the minimum element in each loop.
+ if (array[i] < array[min_idx])
+ min_idx = i;
+ }
+ // put min at the correct position
+ swap(&array[min_idx], &array[step]);
+ // Printing Steps
+ printArray(array,size);
+ }
+}
+//Driver code
+int main()
+{
+ int data[50], size;
+ printf("How many Elements do you have? \n");
+ scanf("%d", &size);
+ //Input Array
+ for (int i = 0; i < size; i++)
+ {
+ printf("Enter Element %d: ", i);
+ scanf("%d", &data[i]);
+ }
+ printf("\nUnsorted Array: \n");
+ printArray(data, size);
+ printf("\nSteps: \n");
+ selectionSort(data, size);
+ printf("Sorted array in Acsending Order:\n");
+ printArray(data, size);
+}
+//selection sort by recursion
+#include <stdio.h>
+void swap(int *a, int *b) {
+ int temp = *a;
+ *a = *b;
+ *b = temp;
+}
+void recursiveSelectionSort(int arr[], int n, int index) {
+ if (index >= n - 1)
+ return;
+ int minIndex = index;
+ for (int i = index + 1; i < n; i++) {
+ if (arr[i] < arr[minIndex]) {
+ minIndex = i;
+ }
+ }
+ if (minIndex != index) {
+ swap(&arr[index], &arr[minIndex]);
+ }
+ recursiveSelectionSort(arr, n, index + 1);
+}
+int main() {
+ int arr[] = {64, 25, 12, 22, 11};
+ int n = sizeof(arr) / sizeof(arr[0]);
+ printf("Original array: ");
+ for (int i = 0; i < n; i++) {
+ printf("%d ", arr[i]);
+ }
+ printf("\n");
+ recursiveSelectionSort(arr, n, 0);
+ printf("Sorted array: ");
+ for (int i = 0; i < n; i++) {
+ printf("%d ", arr[i]);
+ }
+ return 0;
